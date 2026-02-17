@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claruss — Take Back Your Screen Time</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #f5f5f7;
+            background: #000;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: #2997ff; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #64b5f6; }
+
+        /* ── Hero ──────────────────────────────── */
+
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(41, 151, 255, 0.15) 0%, transparent 60%);
+        }
+
+        .hero-content { max-width: 680px; }
+
+        .logo {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #2997ff;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: 21px;
+            color: #a1a1a6;
+            max-width: 520px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .cta-badge {
+            display: inline-block;
+            padding: 10px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 980px;
+            font-size: 14px;
+            color: #f5f5f7;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .cta-badge:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
+
+        /* ── Section base ──────────────────────── */
+
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-inner {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header .label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #2997ff;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #f5f5f7;
+        }
+
+        .section-header p {
+            font-size: 17px;
+            color: #86868b;
+            margin-top: 12px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── Features ──────────────────────────── */
+
+        .features-section {
+            background: #000;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 32px 28px;
+            background: #1d1d1f;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(41, 151, 255, 0.3);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #f5f5f7;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .icon-blue { background: rgba(41, 151, 255, 0.15); }
+        .icon-orange { background: rgba(255, 159, 10, 0.15); }
+        .icon-green { background: rgba(48, 209, 88, 0.15); }
+        .icon-purple { background: rgba(191, 90, 242, 0.15); }
+        .icon-red { background: rgba(255, 69, 58, 0.15); }
+        .icon-teal { background: rgba(100, 210, 255, 0.15); }
+
+        /* ── How it works ──────────────────────── */
+
+        .how-section {
+            background: #0d0d0d;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            counter-increment: step;
+        }
+
+        .step::before {
+            content: counter(step);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2997ff, #1a6dd4);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .step h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #f5f5f7;
+        }
+
+        .step p {
+            font-size: 15px;
+            color: #86868b;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* ── Privacy ───────────────────────────── */
+
+        .privacy-section {
+            background: #000;
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .privacy-card {
+            padding: 28px;
+            background: #1d1d1f;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .privacy-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #f5f5f7;
+        }
+
+        .privacy-card p {
+            font-size: 14px;
+            color: #86868b;
+            line-height: 1.55;
+        }
+
+        /* ── Support ───────────────────────────── */
+
+        .support-section {
+            background: #0d0d0d;
+            text-align: center;
+        }
+
+        .support-section p {
+            font-size: 17px;
+            color: #86868b;
+            margin-bottom: 12px;
+        }
+
+        .support-links {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .support-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 24px 32px;
+            background: #1d1d1f;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            min-width: 180px;
+            transition: border-color 0.3s;
+        }
+
+        .support-link:hover {
+            border-color: rgba(41, 151, 255, 0.3);
+            color: #f5f5f7;
+        }
+
+        .support-link .icon { font-size: 28px; margin-bottom: 4px; }
+        .support-link .label { font-size: 15px; font-weight: 500; }
+
+        /* ── Footer ────────────────────────────── */
+
+        footer {
+            padding: 32px 24px;
+            text-align: center;
+            color: #48484a;
+            font-size: 13px;
+            border-top: 1px solid #1d1d1f;
+        }
+
+        /* ── Responsive ────────────────────────── */
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 38px; }
+            .hero-content .subtitle { font-size: 18px; }
+            .section-header h2 { font-size: 30px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; gap: 32px; }
+            .privacy-grid { grid-template-columns: 1fr; }
+            .support-links { flex-direction: column; align-items: center; }
+            section { padding: 64px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="logo">Claruss</div>
+            <h1>Take back your screen time.</h1>
+            <p class="subtitle">Block distracting apps on your schedule. Require a one-time code to unlock early. No more impulse overrides.</p>
+            <a href="#features" class="cta-badge">See how it works</a>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="label">How It Works</div>
+                <h2>Three steps to focus</h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <h4>Set Your Rules</h4>
+                    <p>Choose which apps to block, pick the days and times, and save your schedule.</p>
+                </div>
+                <div class="step">
+                    <h4>Apps Get Blocked</h4>
+                    <p>When your schedule is active, selected apps are shielded at the system level. No workarounds.</p>
+                </div>
+                <div class="step">
+                    <h4>Unlock With a Code</h4>
+                    <p>Need early access? Request a one-time passcode sent to your email or phone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section" id="features">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="label">Features</div>
+                <h2>Built for real commitment</h2>
+                <p>Every feature is designed to make your screen-time goals stick.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-blue">&#128197;</div>
+                    <h4>Scheduled Blocking</h4>
+                    <p>Block apps by day and time. Work hours, bedtime, study sessions — you set the rules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-orange">&#128274;</div>
+                    <h4>OTP Unlock</h4>
+                    <p>A one-time passcode sent to your email or phone. Adds real friction to impulsive unlocks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-green">&#129309;</div>
+                    <h4>Accountability Partner</h4>
+                    <p>Invite a trusted friend. They must also enter a code before you can unlock.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-red">&#128293;</div>
+                    <h4>Hardcore Mode</h4>
+                    <p>Add a cooldown on rule changes. Stop yourself from impulsively disabling restrictions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-purple">&#128202;</div>
+                    <h4>Activity Log</h4>
+                    <p>Every lock, unlock, and rule change is logged for self-reflection and transparency.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-teal">&#9889;</div>
+                    <h4>Background Enforcement</h4>
+                    <p>System-level shields stay active even when the app isn't open. No way around it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="privacy-section" id="privacy">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="label">Privacy</div>
+                <h2>Your data stays yours</h2>
+                <p>Claruss is built with privacy at its core.</p>
+            </div>
+            <div class="privacy-grid">
+                <div class="privacy-card">
+                    <h4>What we collect</h4>
+                    <p>Your email, display name, and optional phone number for OTP delivery. Your rules and lock history are stored on our servers to sync across sessions.</p>
+                </div>
+                <div class="privacy-card">
+                    <h4>What we don't collect</h4>
+                    <p>We never access your screen time data, app usage statistics, browsing history, or any content on your device. Blocked app tokens are opaque and device-specific.</p>
+                </div>
+                <div class="privacy-card">
+                    <h4>No data sharing</h4>
+                    <p>We do not sell, share, or provide your personal data to third parties. Partners can only see that you requested an unlock — nothing more.</p>
+                </div>
+                <div class="privacy-card">
+                    <h4>Security</h4>
+                    <p>Passwords are hashed with bcrypt. OTP codes are hashed and auto-expire. You can delete your account and all data at any time.</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 32px; font-size: 14px; color: #48484a;">
+                For privacy questions, contact <a href="mailto:privacy@claruss.app">privacy@claruss.app</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Support -->
+    <section class="support-section" id="support">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="label">Support</div>
+                <h2>We're here to help</h2>
+            </div>
+            <div class="support-links">
+                <a href="mailto:support@claruss.app" class="support-link">
+                    <span class="icon">&#9993;</span>
+                    <span class="label">support@claruss.app</span>
+                </a>
+                <a href="https://github.com/Dylan-Burns/claruss/issues" class="support-link">
+                    <span class="icon">&#128736;</span>
+                    <span class="label">GitHub Issues</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Dylan Burns. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
